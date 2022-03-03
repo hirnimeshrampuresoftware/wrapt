@@ -43,7 +43,7 @@ jobs:
         path: .coverage.*
 
   test_aarch64_linux:
-    name: Test (${{ matrix.os }}, ${{ matrix.python-version }},aarch64)
+    name: Test (${{ matrix.os }}, ${{ matrix.pyver }},aarch64)
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -55,7 +55,7 @@ jobs:
           - 3.7
           - 3.8
           - 3.9
-          - "3.10"
+          - 3.10
     env:
       py: python${{ matrix.pyver }}
     steps:
@@ -78,7 +78,7 @@ jobs:
             source .env/bin/activate && \
             ${{ env.py }} -m pip install -U pip wheel setuptools && \
             ${{ env.py }} -m pip install tox tox-gh-actions && \
-            ${{ env.py }} -m tox -e py38 && \
+            ${{ env.py }} -m tox && \
             deactivate'
 
   test_macos:
