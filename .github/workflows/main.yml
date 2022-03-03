@@ -73,6 +73,7 @@ jobs:
             apt install -y ${{ env.py }} && \
             apt install -y ${{ env.py }}-venv && \
             ${{ env.py }} -m venv .env && \
+            apt-get -y install ${{ env.py }}-dev && \
             source .env/bin/activate && \
             ${{ env.py }} -m pip install -U pip wheel setuptools && \
             ${{ env.py }} -m pip install tox tox-gh-actions && \
