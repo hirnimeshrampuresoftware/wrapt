@@ -71,13 +71,13 @@ jobs:
             apt install software-properties-common -y && \
             add-apt-repository ppa:deadsnakes/ppa -y && \
             apt install -y ${{ env.py }} && \
-            apt install -y ${{ env.py }}-venv && \
-            ${{ env.py }} -m venv .env && \
-            source .env/bin/activate && \
-            python -m pip install -U pip wheel setuptools
-            python -m pip install tox tox-gh-actions
-            python -m tox
-            deactivate'
+            #apt install -y ${{ env.py }}-venv && \
+            #${{ env.py }} -m venv .env && \
+            #source .env/bin/activate && \
+            ${{ env.py }} -m pip install -U pip wheel setuptools && \
+            ${{ env.py }} -m pip install tox tox-gh-actions && \
+            ${{ env.py }} -m tox'
+            #deactivate'
 
   test_macos:
     name: Test (${{ matrix.os }}, ${{ matrix.python-version }})
