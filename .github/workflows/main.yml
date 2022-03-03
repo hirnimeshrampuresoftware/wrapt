@@ -77,7 +77,7 @@ jobs:
             source .env/bin/activate && \
             ${{ env.py }} -m pip install -U pip wheel setuptools && \
             ${{ env.py }} -m pip install tox tox-gh-actions && \
-            ${{ env.py }} -m tox && \
+            ${{ env.py }} -m tox -e py38 && \
             deactivate'
 
   test_macos:
