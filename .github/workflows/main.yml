@@ -228,7 +228,7 @@ jobs:
     name: Build wheels (3.6+) on ${{ matrix.os }}
     needs:
     - test_linux
-    - test_aarch64_linux
+   # - test_aarch64_linux
     - test_macos
     - test_windows_py27
     - test_windows
