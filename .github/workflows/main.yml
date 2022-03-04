@@ -43,8 +43,8 @@ jobs:
         path: .coverage.*
 
   test_aarch64_linux:
-    name: Test (${{ matrix.os }}, 3.${{ matrix.pyver }},aarch64)
-    runs-on: ${{ matrix.os }}
+    name: Test (${{ matrix.python.os }}, 3.${{ matrix.python.pyver }},aarch64)
+    runs-on: ${{ matrix.python.os }}
     strategy:
       fail-fast: false
       matrix:
@@ -63,7 +63,7 @@ jobs:
           #- 9
           #- "10"
     env:
-      py: python3.${{ matrix.pyver }}
+      py: python3.${{ matrix.python.pyver }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
