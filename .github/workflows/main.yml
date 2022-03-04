@@ -78,7 +78,7 @@ jobs:
             source .env/bin/activate && \
             ${{ env.py }} -m pip install -U pip wheel setuptools && \
             ${{ env.py }} -m pip install tox tox-gh-actions && \
-            ${{ env.py }} -m tox -e 3${{ matrix.pyver }} && \
+            ${{ env.py }} -m tox -e py3${{ matrix.pyver }} && \
             deactivate'
 
   test_macos:
