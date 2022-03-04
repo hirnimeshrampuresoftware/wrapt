@@ -49,21 +49,13 @@ jobs:
       fail-fast: false
       matrix:
         python:
-          - {os: ubuntu-latest,  python-version: 3.6, pyver: 6}
-          - {os: ubuntu-latest,  python-version: 3.7, pyver: 7}
-          - {os: ubuntu-latest,  python-version: 3.8, pyver: 8}
-          - {os: ubuntu-latest,  python-version: 3.9, pyver: 9}
-          - {os: ubuntu-latest,  python-version: "3.10", pyver: "10"}
-        #os:
-         # - ubuntu-latest
-        #pyver:
-         # - 6
-          #- 7
-          #- 8
-          #- 9
-          #- "10"
+          - {os: ubuntu-latest,  python-version: 3.6, pyver: py36}
+          - {os: ubuntu-latest,  python-version: 3.7, pyver: py37}
+          - {os: ubuntu-latest,  python-version: 3.8, pyver: py38}
+          - {os: ubuntu-latest,  python-version: 3.9, pyver: py39}
+          - {os: ubuntu-latest,  python-version: "3.10", pyver: py310}
     env:
-      py: python3.${{ matrix.python.pyver }}
+      py: python${{ matrix.python.python-version }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -82,9 +74,9 @@ jobs:
             ${{ env.py }} -m venv .env && \
             apt-get -y install ${{ env.py }}-dev && \
             source .env/bin/activate && \
-            ${{ env.py }} -m pip install -U pip wheel setuptools && \
-            ${{ env.py }} -m pip install tox tox-gh-actions && \
-            ${{ env.py }} -m tox -e py3${{ matrix.pyver }} && \
+            pip install -U pip wheel setuptools && \
+            pip install tox tox-gh-actions && \
+            tox -e ${{ matrix.python.pyver }} && \
             deactivate'
 
   test_macos:
@@ -232,10 +224,10 @@ jobs:
           path: dist/*.whl
 
   bdist_wheel:
-    name: Build wheels (3.6+) on ${{ matrix.os }}
+    name: Build wheels (3.6+) on ${{ matrix.os }} for ${{ matrix.arch }}
     needs:
     - test_linux
-   # - test_aarch64_linux
+    - test_aarch64_linux
     - test_macos
     - test_windows_py27
     - test_windows
