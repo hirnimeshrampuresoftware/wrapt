@@ -43,7 +43,7 @@ jobs:
         path: .coverage.*
 
   test_aarch64_linux:
-    name: Test (${{ matrix.os }}, ${{ matrix.pyver }},aarch64)
+    name: Test (${{ matrix.os }}, 3.${{ matrix.pyver }},aarch64)
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -51,13 +51,13 @@ jobs:
         os:
           - ubuntu-latest
         pyver:
-          - 3.6
-          - 3.7
-          - 3.8
-          - 3.9
-          - "3.10"
+          - 6
+          - 7
+          - 8
+          - 9
+          - "10"
     env:
-      py: python${{ matrix.pyver }}
+      py: python3.${{ matrix.pyver }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -78,7 +78,7 @@ jobs:
             source .env/bin/activate && \
             ${{ env.py }} -m pip install -U pip wheel setuptools && \
             ${{ env.py }} -m pip install tox tox-gh-actions && \
-            ${{ env.py }} -m tox && \
+            ${{ env.py }} -m tox -e 3${{ matrix.pyver }} && \
             deactivate'
 
   test_macos:
